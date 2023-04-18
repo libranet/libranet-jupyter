@@ -1,5 +1,5 @@
-autoread_dotenv
-===============
+libranet-jupyter
+================
 
 .. toctree::
     :maxdepth: 2
@@ -21,7 +21,7 @@ autoread_dotenv
     :maxdepth: 2
     :caption: Modules
 
-    modules/autoread_dotenv/index.rst
+    modules/libranet_jupyter/index.rst
 
 
 Indices and tables
