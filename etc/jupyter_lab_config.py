@@ -1107,7 +1107,7 @@ c = get_config()  #noqa
 #  Default: ''
 # c.ServerApp.websocket_url = ''
 
-c.JupyterApp.log_level = 20
+c.JupyterApp.log_level = 10
 
 c.ServerApp.autoreload = True
 

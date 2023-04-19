@@ -1707,6 +1707,18 @@ tornado = ">=6.1.0"
 test = ["check-manifest", "coverage", "jupyterlab-server[test]", "pre-commit", "pytest (>=6.0)", "pytest-check-links (>=0.5)", "pytest-console-scripts", "pytest-cov", "pytest-jupyter (>=0.5.3)", "requests", "requests-cache", "virtualenv"]
 
 [[package]]
+name = "jupyterlab-night"
+version = "0.4.6"
+description = "Dark theme for JupyterLab"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "jupyterlab-night-0.4.6.tar.gz", hash = "sha256:1461f67c2218a51632721722bb5ffc29b3b1aaacbe50fbe32f41a7d842b356a9"},
+    {file = "jupyterlab_night-0.4.6-py3-none-any.whl", hash = "sha256:ec7577081cc59c1a88ce7838606c265ffef51555028e7a4372d63a83223d495a"},
+]
+
+[[package]]
 name = "jupyterlab-pygments"
 version = "0.2.2"
 description = "Pygments theme using JupyterLab CSS variables"
@@ -4356,4 +4368,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<4.0"
-content-hash = "214ec88b8d88cc0bbfcd3f77990bd1fdefdfcf23fc7db787c68f728e6177ae8d"
+content-hash = "60db7f66c995067b1ee1a7bc50e388bba68f41a0bc64aab2d21a760208c5ab0e"

@@ -134,9 +134,10 @@ packages = [{ include = "libranet_jupyter", from = "src" }]
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
 autoread_dotenv = ">=0.0"
+ipykernel = ">=6.22"
 jupyterlab = ">=3.3"
+jupyterlab-night = ">=0.4"
 libranet-logging = ">=1.2"
-# ipykernel = ">=6.9"
 # attrs = ">=22.1"
 # diagrams = ">=0.21"
 # Faker = ">=14.0"
@@ -149,7 +150,6 @@ libranet-logging = ">=1.2"
 
 
 [tool.poetry.group.dev.dependencies]
-# poetry install --with | --without dev
 black = { version = ">=22.1", allow-prereleases = true }
 flake8 = ">=4.0"
 flake8-bugbear = ">=23.2"
