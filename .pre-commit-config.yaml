@@ -124,7 +124,7 @@ repos:
     hooks:
       - id: fix-encoding-pragma
         name: Fix encoding pragma
-        entry: poetry run fix-encoding-pragma
+        entry: poetry run fix-encoding-pragma --remove
         language: system
         types: [python]
 

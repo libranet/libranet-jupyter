@@ -146,6 +146,11 @@ libranet-logging = ">=1.2"
 # py2neo = ">=2021.2"
 # pydantic = ">=1.9"
 
+# install-issue on python3.12-dev, see
+# - https://github.com/zeromq/pyzmq/issues/1764
+# - https://github.com/zeromq/pyzmq/issues/1763
+# pyzmq = "23.2.1"
+
 
 [tool.poetry.group.dev.dependencies]
 black = { version = ">=22.1", allow-prereleases = true }

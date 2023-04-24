@@ -24,5 +24,10 @@ Package Contents
 .. py:data:: __version__
    :value: '0.1.0'
 
-   
+
+
+.. py:data:: __copyright__
+   :value: 'Libranet'
+
+
 
