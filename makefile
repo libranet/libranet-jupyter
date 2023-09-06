@@ -23,7 +23,7 @@ PROJECT_NAME='libranet-jupyter'
 
 
 .PHONY: install  ## full initial installation
-install: create-dirs create-dirs-extra dotenv-install poetry-install pip-upgrade symlink-venv-dirs
+install: create-dirs create-dirs-extra dotenv-install poetry-install symlink-venv-dirs pip-upgrade
 
 
 .PHONY: create-dirs-extra ## initialize dir-structure, create dirs & symlinks
