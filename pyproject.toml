@@ -193,7 +193,7 @@ tuna = ">=0.5.11"
 
 [tool.poetry.group.security.dependencies]
 bandit = { extras = ["toml"], version = ">=1.7.4" }
-safety = ">=2.3.5"
+# safety = ">=2.3.5"
 
 [tool.poetry.group.testing.dependencies]
 coverage = { extras = ["toml"], version = ">=6.2" }
