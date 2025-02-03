@@ -114,6 +114,35 @@ c = get_config()  # noqa: [name-defined]
 ##
 #  See also: Application.logging_config
 # c.JupyterApp.logging_config = {}
+c.ServerApp.logging_config = {
+    "version": 1,
+    "handlers": {
+        "logfile": {
+            # "class": "logging.FileHandler",
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "generic",
+            # "filename": "10-debug.log"
+            "filename": "var/log/jupyter-serverapp.log",
+            "maxBytes": 104857600, # 100 MB = 100*1024*1024
+            "backupCount": 10,
+            "encoding": "utf8",
+        },
+    },
+    "formatters": {
+        "generic": {
+            "format": "%(asctime)s - %(name)s - %(levelname)-7s - %(message)s",
+            "datefmt": "%Y/%m/%d %H:%M:%S",
+        },
+    },
+
+    "loggers": {
+        "ServerApp": {
+            "level": "INFO",
+            "handlers": ["console", "logfile"],
+        },
+    },
+}
 
 ## Instead of starting the Application, dump configuration to stdout
 #  See also: Application.show_config
