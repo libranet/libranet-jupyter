@@ -2,6 +2,7 @@
 
 
 # Install tab-completions for just
+[group: 'just']
 [windows]
 just-install-completions:
     #!pwsh.exe
