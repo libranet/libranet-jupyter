@@ -36,7 +36,7 @@ skips = ["*/test_*.py"]
 
 [tool.black]
 line-length = 120
-target_version = ["py310"]
+target-version = ["py312"]
 include = '\.py$'          # regex -> single-quotes
 
 
@@ -120,6 +120,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.10",
@@ -137,20 +138,6 @@ ipykernel = ">=6.22"
 jupyterlab = ">=3.3"
 jupyterlab-night = ">=0.4"
 libranet-logging = ">=1.2"
-# attrs = ">=22.1"
-# diagrams = ">=0.21"
-# Faker = ">=14.0"
-# importlib-metadata = ">=4.12"
-# neo4j = {version = ">=5.0", allow-prereleases = true}
-# neomodel = ">=4.0"
-# pandas = ">=1.4"
-# py2neo = ">=2021.2"
-# pydantic = ">=1.9"
-
-# install-issue on python3.12-dev, see
-# - https://github.com/zeromq/pyzmq/issues/1764
-# - https://github.com/zeromq/pyzmq/issues/1763
-# pyzmq = "23.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -258,7 +245,7 @@ include = ["src", "tests"]
 
 
 # [tool.tox.legacy_tox_ini]
-# # envlist = ["py38", "py39", "py310", "py311"]
+# # envlist = ["py38", "py39", "py310", "py311", "py312"]
 # # isolated_build = true
 # toxworkdir = "var/cache/tox"
 
@@ -267,8 +254,8 @@ include = ["src", "tests"]
 # see https://tox.wiki/en/3.5.0/example/basic.html#pyproject-toml-tox-legacy-ini
 legacy_tox_ini = """
 [tox]
-envlist = py{39,310,311}
-# envlist = [py39, py310, py311]
+envlist = py{39,310,311,312}
+# envlist = [py39, py310, py311, py312]
 isolated_build = True
 toxworkdir = var/cache/tox
 
