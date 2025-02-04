@@ -18,7 +18,7 @@ A Jupyter-notebook environment.
 ```
 cd <your-projects-dir>
 git clone https://github.com/libranet/libranet-jupyter.git
-make install
+just install
 ```
 
 
@@ -26,7 +26,7 @@ make install
 Start jupyter-lab in foreground:
 
 ```
-make jupyter-start
+just jupyter-start
 ```
 
 
@@ -35,7 +35,7 @@ make jupyter-start
 Run the unittests with pytest:
 
 ```
-make pytest
+just pytest
 ```
 
 

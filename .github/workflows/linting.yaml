@@ -1,8 +1,5 @@
 name: Linting
 
-env:
-    POETRY_VERSION: "1.4.0"
-
 on:
     pull_request:
         types: [opened, reopened, synchronize]
@@ -25,14 +22,27 @@ jobs:
                   persist-credentials: false
                   fetch-depth: 0
 
-            - name: Set up Python 3.11
-              uses: actions/setup-python@v5
-              with:
-                  python-version: "3.11"
+            # - name: Set up Python 3.12
+            #   uses: actions/setup-python@v5
+            #   with:
+            #       python-version: "3.12"
 
-            - name: Set up Poetry
+            - name: Show env variables
               run: |
-                  pip install poetry==${{ env.POETRY_VERSION }}
+                  echo "$HOME/bin" >> $GITHUB_PATH
+                  echo "${pwd}/.venv/bin" >> $GITHUB_PATH
+                  printenv | sort
+
+            - name: Install just
+              run: |
+                  curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+                  which just
+                  just --version
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v5
+              with:
+                  version: "latest"
 
             - name: Install
               run: |
@@ -40,31 +50,31 @@ jobs:
 
             - name: Flake8
               run: |
-                  make flake8
+                  just flake8
 
             - name: Ruff
               run: |
-                  make ruff-check
+                  just ruff-check
 
             - name: Pylint
               run: |
-                  make pylint
+                  just pylint
 
             - name: Mypy
               run: |
-                  make mypy
+                  just mypy
 
             - name: Pyroma
               run: |
-                  make pyroma
+                  just pyroma
 
-            - name: Check poetry
-              run: |
-                  make poetry-check
+            # - name: Check poetry
+            #   run: |
+            #       make poetry-check
 
-            - name: Check poetry lock
-              run: |
-                  make poetry-lock-check
+            # - name: Check poetry lock
+            #   run: |
+            #       make poetry-lock-check
 
             - name: Bandit
               run: |
