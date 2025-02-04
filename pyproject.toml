@@ -12,9 +12,12 @@
 #   > poetry install --only docs
 #   > poetry install (--with|--without) (docs|dev|ipython|profiling|testing|typing)
 
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+# requires = ["poetry-core>=1.0.0"]
+# build-backend = "poetry.core.masonry.api"
 
 
 [tool.bandit]
@@ -98,21 +101,19 @@ ignore_missing_imports = true
 mypy_path = ["src"]
 
 
-[tool.nox]
-envdir = "var/cache/nox"
+# [tool.nox]
+# envdir = "var/cache/nox"
 
 
-[tool.poetry]
+[project]
 name = "libranet_jupyter"
 version = "0.1"
-license = "MIT"
 description = "Utility-package for jupter notebooks."
 readme = "docs/readme.md"
-authors = ["Wouter Vanden Hove <wouter@libranet.eu>"]
-maintainers = ["Wouter Vanden Hove <wouter@libranet.eu>"]
-homepage = "https://github.com/libranet/libranet-jupyter"
-repository = "https://github.com/libranet/libranet-jupyter"
-#documentation = "https://libranet-jupyter.readthedocs.io"
+authors = [{ name = "Wouter Vanden Hove", email = "wouter@libranet.eu" }]
+maintainers = [{ name = "Wouter Vanden Hove", email = "wouter@libranet.eu" }]
+requires-python = ">=3.10"
+license = { file = "docs/license.md" }
 keywords = ["jupyter", "jupyterlab"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -128,90 +129,147 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
     "Typing :: Typed",
 ]
-packages = [{ include = "libranet_jupyter", from = "src" }]
+dependencies = [
+    "autoread_dotenv>=0.0",
+    "ipykernel>=6.22",
+    "jupyterlab>=3.3",
+    "jupyterlab-night>=0.4",
+    "libranet-logging>=1.2",
+]
+# packages = [{ include = "libranet_jupyter", from = "src" }]
 
+[project.urls]
+homepage = "https://github.com/libranet/libranet-jupyter"
+repository = "https://github.com/libranet/libranet-jupyter"
+docs = "https://libranet-jupyter.readthedocs.io"
+"Issue Tracker" = "https://github.com/Libranet/libranet_jupyter/issues"
 
-[tool.poetry.dependencies]
-python = ">=3.10,<4.0"
-autoread_dotenv = ">=0.0"
-ipykernel = ">=6.22"
-jupyterlab = ">=3.3"
-jupyterlab-night = ">=0.4"
-libranet-logging = ">=1.2"
+[dependency-groups]
+dev = [
+    "pylint>=3.1.0",
+    "ruff>=0.8.6",
+]
+ipython = [
+    # ipdb = ">=0.13.9"
+    "ipython>=8.31.0",
+    "rich>=13.9.4",
+]
+jupyter = [
+    "ipykernel>=6.29.5",
+    "nbformat>=5.10.4",
+    "plotly>=5.24.1",
+]
+deployment = [
+    "supervisor>=4.2",
+]
+dist = [
+    "pyroma>=2.0.0",
+]
+docs = [
+    "autoapi>=2.0.1",
+    "markupsafe>=2.1.2",
+    "myst-parser>=1.0.0",
+    "recommonmark>=0.7.1",
+    "Sphinx>=4.4.0",
+    "sphinx-autoapi>=1.8.4",
+    "sphinx-rtd-theme>=1.0.0",
+]
+pre-commit = [
+    "pre-commit>=4.0.1",
+    "pre-commit-hooks>=5.0.0",
+]
+profiling = [
+    "importtime-waterfall>=1.0.0",
+    "tuna>=0.5.11",
+]
+testing = [
+    "coverage>=6.2",
+    "pytest>=8.1.1",
+    "pytest-clarity>=1.0",
+    "pytest-codecov>=0.5.1",
+    "pytest-cov>=5.0.0",
+    "pytest-dotenv>=0.5.2",
+    "pytest-nunit>=1.0.7",
+]
+typing = [
+    "lxml>=4.9.2",
+    "mypy>=0.931",
+]
+security = [
+    "bandit>=1.7.4",
+    # "safety>=2.3.5",
+]
 
+# [tool.poetry.group.dev.dependencies]
+# black = { version = ">=22.1", allow-prereleases = true }
+# flake8 = ">=4.0"
+# flake8-bugbear = ">=23.2"
+# flake8-docstrings = ">=1.6"
+# flake8-pyproject = ">=1.2"
+# flake8-rst-docstrings = ">=0.2"
+# isort = ">=5.10"
+# pre-commit = ">=2.14"
+# pre-commit-hooks = ">=4.1"
+# pylint = ">=2.12"
+# ruff = ">=0.0.250"
 
-[tool.poetry.group.dev.dependencies]
-black = { version = ">=22.1", allow-prereleases = true }
-flake8 = ">=4.0"
-flake8-bugbear = ">=23.2"
-flake8-docstrings = ">=1.6"
-flake8-pyproject = ">=1.2"
-flake8-rst-docstrings = ">=0.2"
-isort = ">=5.10"
-pre-commit = ">=2.14"
-pre-commit-hooks = ">=4.1"
-pylint = ">=2.12"
-ruff = ">=0.0.250"
+# [tool.poetry.group.deployment.dependencies]
+# gunicorn = ">=20.1"
+# supervisor = ">=4.2"
 
-[tool.poetry.group.deployment.dependencies]
-gunicorn = ">=20.1"
-supervisor = ">=4.2"
+# [tool.poetry.group.dist.dependencies]
+# pyroma = ">=4.2"
+# twine = ">=4.0.2"
 
-[tool.poetry.group.dist.dependencies]
-pyroma = ">=4.2"
-twine = ">=4.0.2"
+# [tool.poetry.group.docs.dependencies]
+# autoapi = ">=2.0.1"
+# markupsafe = ">=2.1.2"
+# myst-parser = ">=1.0.0"
+# recommonmark = ">=0.7.1"
+# Sphinx = ">=4.4.0"
+# sphinx-autoapi = ">=1.8.4"
+# sphinx-rtd-theme = ">=1.0.0"
 
-[tool.poetry.group.docs.dependencies]
-autoapi = ">=2.0.1"
-markupsafe = ">=2.1.2"
-myst-parser = ">=1.0.0"
-recommonmark = ">=0.7.1"
-Sphinx = ">=4.4.0"
-sphinx-autoapi = ">=1.8.4"
-sphinx-rtd-theme = ">=1.0.0"
+# [tool.poetry.group.ipython.dependencies]
+# ipdb = ">=0.13.9"
+# ipython = ">=8.4.0"
 
-[tool.poetry.group.ipython.dependencies]
-ipdb = ">=0.13.9"
-ipython = ">=8.4.0"
+# [tool.poetry.group.profiling.dependencies]
+# importtime-waterfall = ">=1.0.0"
+# tuna = ">=0.5.11"
 
-[tool.poetry.group.profiling.dependencies]
-importtime-waterfall = ">=1.0.0"
-tuna = ">=0.5.11"
-
-[tool.poetry.group.security.dependencies]
-bandit = { extras = ["toml"], version = ">=1.7.4" }
+# [tool.poetry.group.security.dependencies]
+# bandit = { extras = ["toml"], version = ">=1.7.4" }
 # safety = ">=2.3.5"
 
-[tool.poetry.group.testing.dependencies]
-coverage = { extras = ["toml"], version = ">=6.2" }
-nox = ">=2022.11.21"
-nox-poetry = ">=1.0.2"
-pytest = ">=7.0.1"
-pytest-codecov = ">=0.5.1"
-pytest-cov = ">=3.0.0"
-tox = ">=4.4.7"
+# [tool.poetry.group.testing.dependencies]
+# coverage = { extras = ["toml"], version = ">=6.2" }
+# nox = ">=2022.11.21"
+# nox-poetry = ">=1.0.2"
+# pytest = ">=7.0.1"
+# pytest-codecov = ">=0.5.1"
+# pytest-cov = ">=3.0.0"
+# tox = ">=4.4.7"
 
-[tool.poetry.group.typing.dependencies]
-lxml = { version = ">=4.9.2", optional = true, allow-prereleases = false } # mypy coverage-report
-mypy = ">=0.931"
-
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/Libranet/libranet_jupyter/issues"
+# [tool.poetry.group.typing.dependencies]
+# lxml = { version = ">=4.9.2", optional = true, allow-prereleases = false } # mypy coverage-report
+# mypy = ">=0.931"
 
 
-[tool.poetry-release]
-disable-dev = false
-disable-push = false
-disable-tag = false
-sign-commit = false
-sign-tag = false
-post-release-commit-message = "Start next development iteration {next_version}"
-release-commit-message = "Release {package_name} {version}"
-tag-name = "{version}"
-release-replacements = [
-    { file = "docs/changes.md", pattern = "Unreleased \\(YYYY-MM-DD\\)", replace = "{version} ({date})" },
-    { file = "src/libranet_jupyter/__init__.py", pattern = '__version__ = "{version}"', replace = '__version__ = "{next_version}"' },
-]
+
+# [tool.poetry-release]
+# disable-dev = false
+# disable-push = false
+# disable-tag = false
+# sign-commit = false
+# sign-tag = false
+# post-release-commit-message = "Start next development iteration {next_version}"
+# release-commit-message = "Release {package_name} {version}"
+# tag-name = "{version}"
+# release-replacements = [
+#     { file = "docs/changes.md", pattern = "Unreleased \\(YYYY-MM-DD\\)", replace = "{version} ({date})" },
+#     { file = "src/libranet_jupyter/__init__.py", pattern = '__version__ = "{version}"', replace = '__version__ = "{next_version}"' },
+# ]
 
 [tool.pylint.format]
 max-line-length = 120
@@ -229,12 +287,13 @@ disable = [
 
 [tool.pytest.ini_options]
 cache_dir = "var/cache/pytest"
-log_cli = false                   # enable to show log-output
+log_cli = false  # enable to show log-output
 log_cli_level = "NOTSET"
 filterwarnings = []
 markers = ["unit", "integration"]
 testpaths = ["tests"]
 # the junit-report is used to report coverage in gitlab
+# the nunit-report is used to report coverage in azure pipelines.
 addopts = "--color=yes --junit-xml='var/cache/coverage/pytest.xml'"
 
 
@@ -250,27 +309,68 @@ include = ["src", "tests"]
 # toxworkdir = "var/cache/tox"
 
 
-[tool.tox]
-# see https://tox.wiki/en/3.5.0/example/basic.html#pyproject-toml-tox-legacy-ini
-legacy_tox_ini = """
-[tox]
-envlist = py{39,310,311,312}
-# envlist = [py39, py310, py311, py312]
-isolated_build = True
-toxworkdir = var/cache/tox
+# [tool.tox]
+# # see https://tox.wiki/en/3.5.0/example/basic.html#pyproject-toml-tox-legacy-ini
+# legacy_tox_ini = """
+# [tox]
+# envlist = py{39,310,311,312}
+# # envlist = [py39, py310, py311, py312]
+# isolated_build = True
+# toxworkdir = var/cache/tox
 
-[testenv]
-allowlist_externals =
-    make
-    poetry
-skip_install = true
-commands =
-    make install
-    pytest --pdb --exitfirst
-"""
+# [testenv]
+# allowlist_externals =
+#     make
+#     poetry
+# skip_install = true
+# commands =
+#     make install
+#     pytest --pdb --exitfirst
+# """
 
 
 [tool.ruff]
 # https://beta.ruff.rs/docs/configuration/
-cache-dir = "var/cache/ruff"
+# https://docs.astral.sh/ruff/configuration/#using-pyprojecttoml
+cache-dir = "var/cache/ruff" # relative to project_root
 line-length = 120
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # D203 conflicts withs D211
+    "D203", # 1 blank line required before class docstring
+    # "D211", # No blank lines allowed before class docstring
+    # D212 conflicts with D213
+    "D212",    # Multi-line docstring summary should start at the first line
+    # "D213",  # Multi-line docstring summary should start at the second line
+    # conflicts with 'ruff format'
+    "COM812",  # Trailing comma missing
+    "ISC001",  # Implicitly concatenated string literals on one line
+]
+
+[tool.ruff.lint.isort]
+# https://docs.astral.sh/ruff/settings/#lintisort
+combine-as-imports = true
+force-single-line = false
+from-first = false
+known-third-party = []
+known-first-party = ["libranet_jupyter"]
+known-local-folder = ["_helpers"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["INP001"]  # tests-dir should not be a python-package
+
+[tool.uv]
+managed = true
+package = true
+# default-groups = [
+    # "dev",
+    # "databricks",
+    # "ipython",
+    # "jupyter",
+    # # "licensing",
+    # "pre-commit",
+    # "testing",
+    # "typing",
+# ]

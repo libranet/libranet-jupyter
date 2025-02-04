@@ -10,5 +10,7 @@
 # export PATH := $(VENV_BIN_DIR):$(PATH)
 
 # prepend local bin-directory to $PATH
+venv_dir := if os_family() == "windows" { justfile_directory() / ".venv" } else { justfile_directory() / ".venv" }
+
 venv_bin_dir := if os_family() == "windows" { justfile_directory() / ".venv/Scripts" } else { justfile_directory() / ".venv/bin" }
 export PATH := if os_family() == "windows" { venv_bin_dir + x";${PATH}" } else { venv_bin_dir + x":${PATH}" }

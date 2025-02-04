@@ -13,9 +13,9 @@ SED := `command -v gsed || command -v sed`
 # cp --backup  creates .env~, but will overwrite this next time.
 # safest way, is to not overwrite existing .env-files, manual intervention needed.
 [group: 'dotenv']
-dotenv-install-from-example:
-	@echo -e "Copying .env.example to .env" ;\
-	cp -n .env.example .env ;\
+dotenv-install-from-template:
+	@echo -e "Copying .env.template to .env" ;\
+	cp -n .env.template .env ;\
 	echo "Please review any credentials in the .env-file."
 
 
@@ -26,6 +26,6 @@ dotenv-set-basedir:
 	sed -i 's@__CWD__@'"$(PWD)"'@'  .env
 
 
-# install .env-file from .env.example
+# install .env-file from .env.template
 [group: 'dotenv']
-dotenv-install: dotenv-install-from-example dotenv-set-basedir
+dotenv-install: dotenv-install-from-template dotenv-set-basedir

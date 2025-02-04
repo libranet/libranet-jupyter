@@ -76,13 +76,15 @@ import '.just/70-supervisord.just'
 import '.just/75-twine.just'
 import '.just/just.just'
 import '.just/sshx.just'
+import '.just/uv.justfile'
 
 
 PROJECT_NAME := 'libranet-jupyter'
 
 
 # full initial installation
-install: create-dirs create-dirs-extra dotenv-install poetry-install symlink-venv-dirs pip-upgrade
+# install: create-dirs create-dirs-extra dotenv-install poetry-install symlink-venv-dirs pip-upgrade
+install: create-dirs create-dirs-extra dotenv-install uv-sync-all-groups symlink-venv-dirs
 
 
 # create-dirs-extra ## initialize dir-structure, create dirs & symlinks
