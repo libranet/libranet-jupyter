@@ -18,10 +18,10 @@ To set up a development environment, please follow these steps:
    git clone https://github.com/libranet/libranet-jupyter
    ```
 
-2. Run make install
+2. Run just install
 
    ```sh
-   make install
+   just install
    ```
 
 ## Issues and feature requests

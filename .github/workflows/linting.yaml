@@ -46,7 +46,7 @@ jobs:
 
             - name: Install
               run: |
-                  make install
+                  just install
 
             - name: Flake8
               run: |
