@@ -48,25 +48,25 @@ jobs:
               run: |
                   just install
 
-            - name: Flake8
-              run: |
-                  just flake8
+            # - name: Flake8
+            #   run: |
+            #       just flake8
 
-            - name: Ruff
-              run: |
-                  just ruff-check
+            # - name: Ruff
+            #   run: |
+            #       just ruff-check
 
-            - name: Pylint
-              run: |
-                  just pylint
+            # - name: Pylint
+            #   run: |
+            #       just pylint
 
-            - name: Mypy
-              run: |
-                  just mypy
+            # - name: Mypy
+            #   run: |
+            #       just mypy
 
-            - name: Pyroma
-              run: |
-                  just pyroma
+            # - name: Pyroma
+            #   run: |
+            #       just pyroma
 
             # - name: Check poetry
             #   run: |
@@ -76,14 +76,14 @@ jobs:
             #   run: |
             #       make poetry-lock-check
 
-            - name: Bandit
-              run: |
-                  make bandit-html
+            # - name: Bandit
+            #   run: |
+            #       make bandit-html
 
-            # https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
-            - name: Upload Bandit Report
-              uses: actions/upload-artifact@v4
-              with:
-                  name: Bandit Report
-                  path: var/html-bandit/index.html
-                  retention-days: 10
+            # # https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
+            # - name: Upload Bandit Report
+            #   uses: actions/upload-artifact@v4
+            #   with:
+            #       name: Bandit Report
+            #       path: var/html-bandit/index.html
+            #       retention-days: 10

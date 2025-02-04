@@ -6,6 +6,8 @@
 jupyter-start:
 	jupyter lab
 
+alias start-jupyter := jupyter-start
+
 
 # Show list of available kernels
 [group: 'jupyter']

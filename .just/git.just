@@ -58,20 +58,8 @@ git-tmp-clone:
 
 
 # show latest tag
+[group: 'git']
 git-latest-tag:
 	$(eval LATEST_TAG := $(git describe --tags --abbrev=0)) \
 	@ echo -e "Latest tag: ${LATEST_TAG}"
 	export LATEST_TAG
-
-
-# publish-to-pypi
-publish-to-pypi: git-tmp-clone
-	set -e ; \
-	$(eval LATEST_TAG := $(git describe --tags --abbrev=0)) \
-	mkdir -p ${CLONE_DIR}-${LATEST_TAG}
-	cd ${CLONE_DIR}-${LATEST_TAG} && \
-	git fetch --tags && \
-	&& \
-	git checkout ${LATEST_TAG}
-	poetry build && \
-	poetry publish

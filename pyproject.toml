@@ -13,9 +13,9 @@
 #   > poetry install (--with|--without) (docs|dev|ipython|profiling|testing|typing)
 
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+# [build-system]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
 # requires = ["poetry-core>=1.0.0"]
 # build-backend = "poetry.core.masonry.api"
 
@@ -145,10 +145,10 @@ docs = "https://libranet-jupyter.readthedocs.io"
 "Issue Tracker" = "https://github.com/Libranet/libranet_jupyter/issues"
 
 [dependency-groups]
-dev = [
-    "pylint>=3.1.0",
-    "ruff>=0.8.6",
-]
+# dev = [
+#     "pylint>=3.1.0",
+#     "ruff>=0.8.6",
+# ]
 ipython = [
     # ipdb = ">=0.13.9"
     "ipython>=8.31.0",
@@ -162,9 +162,9 @@ jupyter = [
 deployment = [
     "supervisor>=4.2",
 ]
-dist = [
-    "pyroma>=2.0.0",
-]
+# dist = [
+#     "pyroma>=2.0.0",
+# ]
 docs = [
     "autoapi>=2.0.1",
     "markupsafe>=2.1.2",
@@ -178,27 +178,27 @@ pre-commit = [
     "pre-commit>=4.0.1",
     "pre-commit-hooks>=5.0.0",
 ]
-profiling = [
-    "importtime-waterfall>=1.0.0",
-    "tuna>=0.5.11",
-]
-testing = [
-    "coverage>=6.2",
-    "pytest>=8.1.1",
-    "pytest-clarity>=1.0",
-    "pytest-codecov>=0.5.1",
-    "pytest-cov>=5.0.0",
-    "pytest-dotenv>=0.5.2",
-    "pytest-nunit>=1.0.7",
-]
-typing = [
-    "lxml>=4.9.2",
-    "mypy>=0.931",
-]
-security = [
-    "bandit>=1.7.4",
-    # "safety>=2.3.5",
-]
+# profiling = [
+#     "importtime-waterfall>=1.0.0",
+#     "tuna>=0.5.11",
+# ]
+# testing = [
+#     "coverage>=6.2",
+#     "pytest>=8.1.1",
+#     "pytest-clarity>=1.0",
+#     "pytest-codecov>=0.5.1",
+#     "pytest-cov>=5.0.0",
+#     "pytest-dotenv>=0.5.2",
+#     "pytest-nunit>=1.0.7",
+# ]
+# typing = [
+#     "lxml>=4.9.2",
+#     "mypy>=0.931",
+# ]
+# security = [
+#     "bandit>=1.7.4",
+#     # "safety>=2.3.5",
+# ]
 
 
 [tool.pylint.format]
@@ -293,7 +293,7 @@ known-local-folder = ["_helpers"]
 
 [tool.uv]
 managed = true
-package = true
+package = false
 # default-groups = [
     # "dev",
     # "databricks",

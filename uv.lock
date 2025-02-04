@@ -985,7 +985,7 @@ wheels = [
 [[package]]
 name = "libranet-jupyter"
 version = "0.1"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "autoread-dotenv" },
     { name = "ipykernel" },
