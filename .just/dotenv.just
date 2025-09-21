@@ -1,31 +1,55 @@
 # See ../justfile
 
-
-# See https://stackoverflow.com/questions/19456518/error-when-using-sed-with-find-command-on-os-x-invalid-command-code
-# By default MacOS does not use GNU Sed, but a different less-compatible sed-implemenation that
-# easily triggers following error: 'invalid command code'.
-# You need to install GNU Sed via 'brew install gnu-sed' to make the 'gsed'-command available on $PATH.
-# In our makesfiles, use gsed if found, otherwise regular sed.
-SED := `command -v gsed || command -v sed`
+env_file :=  justfile_directory() / ".env"
 
 
 # instantiate the dotenv-file (no override)
-# cp --backup  creates .env~, but will overwrite this next time.
+# cp --backup creates .env~, but will overwrite this next time.
 # safest way, is to not overwrite existing .env-files, manual intervention needed.
 [group: 'dotenv']
+[unix]
 dotenv-install-from-template:
-	@echo -e "Copying .env.template to .env" ;\
-	cp -n .env.template .env ;\
-	echo "Please review any credentials in the .env-file."
+    #!/usr/bin/env bash
+    if [ -f .env ]; then
+        echo -e ".env file already exists. Not overwriting it.\n"
+    else
+        echo -e "Copying .env.template to .env" ;\
+        cp .env.template .env ;\
+    fi
 
 
-# replace placeholder __CDW__ with current working directory
+
+# # replace placeholder __CWD__ with current working directory
+# [group: 'dotenv']
+# dotenv-set-basedir:
+#     @echo -e "Replacing string __CWD__ -> $(PWD)" ;\
+#     sed -i 's@__CWD__@'"$(PWD)"'@'  .env
+
+
+# replace placeholder __CWD__ with current working directory
 [group: 'dotenv']
+[linux]
 dotenv-set-basedir:
-	@echo -e "Replacing string __CWD__ -> $(PWD)" ;\
-	sed -i 's@__CWD__@'"$(PWD)"'@'  .env
+    #!/usr/bin/env bash
+    if [ -f .env ]; then
+        echo -e "Replacing string __CWD__ with current directory $(pwd) in .env file."
+        sed -i.backup 's@__CWD__@'"$(pwd)"'@g' .env
+        echo -e ".env updated successfully. Please review any credentials.\n"
+    else
+        echo -e "Error: .env file not found!\n" >&2
+        exit 1
+    fi
 
 
 # install .env-file from .env.template
 [group: 'dotenv']
 dotenv-install: dotenv-install-from-template dotenv-set-basedir
+
+alias install-dotenv := dotenv-install
+
+
+# display env-vars defined in .env
+[group: 'dotenv']
+show-dotenv:
+    @ echo -e "Following environment variables are defined in the {{env_file}}:"
+    @ cat .env
